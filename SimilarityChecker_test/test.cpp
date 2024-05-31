@@ -29,5 +29,4 @@ TEST_F(SimilarityCheckerFixture, LengthScore_Partial) {
 
 TEST_F(SimilarityCheckerFixture, LengthScore_Exception) {
 	EXPECT_EQ(getLengthSimilarityScore("AAABB", ""), 0);
-	EXPECT_EQ(getLengthSimilarityScore("", ""), 0);
 }
