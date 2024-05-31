@@ -15,7 +15,21 @@ public:
 		int same_cnt = getSameCnt(str_1, str_2);
 		int diff_cnt_1 = getDiffCnt(str_1, str_2);
 		if (same_cnt == 0) return 0;
-		return MAX_SCORE_ALPHA;
+		if (diff_cnt_1 == 0) return MAX_SCORE_ALPHA;
+		return same_cnt * MAX_SCORE_ALPHA / 4;
+	}
+
+private:
+	string str_1;
+	string str_2;
+
+	const int MAX_SCORE_ALPHA = 40;
+
+	void checkValidity() {
+		for (auto ch : str_1 + str_2) {
+			if (ch >= 'A' && ch <= 'Z') continue;
+			throw invalid_argument("Should be Alpha with Upper case!");
+		}
 	}
 
 	int getSameCnt(string targetStr, string refStr) {
@@ -32,28 +46,5 @@ public:
 			if (refStr.find(ch) == string::npos) diffCnt++;
 		}
 		return diffCnt;
-	}
-
-	int getSameCnt(int& same_cnt, int& diff_cnt) {
-		same_cnt = 0;
-		diff_cnt = 0;
-		for (auto ch : str_1) {
-			if (str_2.find(ch) == string::npos) diff_cnt++;
-			else same_cnt++;
-		}
-		if (same_cnt == 0) return 0;
-	}
-
-private:
-	string str_1;
-	string str_2;
-
-	const int MAX_SCORE_ALPHA = 40;
-
-	void checkValidity() {
-		for (auto ch : str_1 + str_2) {
-			if (ch >= 'A' && ch <= 'Z') continue;
-			throw invalid_argument("Should be Alpha with Upper case!");
-		}
 	}
 };
