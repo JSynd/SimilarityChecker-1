@@ -15,6 +15,12 @@ public:
 			// PASS
 		}
 	}
+
+	void checkAlphabet(string str1, string str2, int expectScore) {
+		checker.setStrings(str1, str2);
+		int score = checker.checkAlpha();
+		EXPECT_EQ(score, expectScore);
+	}
 };
 
 TEST_F(SimilarityCheckFixture, AlphaScore_InvalidInput_LowerCase) {
@@ -33,15 +39,8 @@ TEST_F(SimilarityCheckFixture, AlphaScore_InvalidInput_NonAlpha) {
 }
 
 TEST_F(SimilarityCheckFixture, AlphaScore_ScoreMax) {
-	checker.setStrings(string("ABC"), string("ABC"));
-	EXPECT_EQ(checker.checkAlpha(), 40);
-
-	checker.setStrings(string("ABC"), string("ABCBA"));
-	EXPECT_EQ(checker.checkAlpha(), 40);
-
-	checker.setStrings(string("ABCAB"), string("ABC"));
-	EXPECT_EQ(checker.checkAlpha(), 40);
-
-	checker.setStrings(string("A"), string("AAA"));
-	EXPECT_EQ(checker.checkAlpha(), 40);
+	checkAlphabet("ABC", "ABC", 40);
+	checkAlphabet("ABC", "ABCBA", 40);
+	checkAlphabet("ABCAB", "ABC", 40);
+	checkAlphabet("A", "AAA", 40);
 }

@@ -12,6 +12,12 @@ public:
 	}
 
 	int checkAlpha() {
+		for (auto ch : str_1) {
+			if (str_2.find(ch) == string::npos) return 0;
+		}
+		for (auto ch : str_1) {
+			if (str_2.find(ch) == string::npos) return 0;
+		}
 		return MAX_SCORE_ALPHA;
 	}
 
