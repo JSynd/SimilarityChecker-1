@@ -13,13 +13,19 @@ public:
 			str_2 = str1;
 		}
 	}
+
 	int checkLength() {
-		if (str_1.size() == str_2.size()) return 60;
-		if (str_1.size() >= str_2.size() * 2) return 0;
-		if (str_2.size() == 2) return 30;
-		if (str_2.size() == 3) return 20;
-		return -1;
+		int len_1 = str_1.size(); 
+		int len_2 = str_2.size();
+
+		if (len_1 == len_2) return MAX_SCORE_LENGTH;
+		if (len_1 >= len_2 * 2) return 0;
+		
+		int gap = len_1 - len_2;
+		int penaltyScore = MAX_SCORE_LENGTH * gap / len_2;
+		return MAX_SCORE_LENGTH - penaltyScore;
 	}
 private:
 	string str_1, str_2;
+	const int MAX_SCORE_LENGTH = 60;
 };
