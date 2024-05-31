@@ -8,19 +8,21 @@ public:
 	void setStrings(string& str1, string& str2) {
 		str_1 = str1;
 		str_2 = str2;
+		checkValidity();
 	}
 
-	void checkAlpha(string& str1, string& str2) {
-		for (auto ch : str1) {
-			if (ch >= 'a' && ch <= 'z') throw invalid_argument("found lower case!");
-		}
-		for (auto ch : str2) {
-			if (ch >= 'a' && ch <= 'z') throw invalid_argument("found lower case!");
-		}
-		throw invalid_argument("error!");
+	void checkAlpha() {
 		return;
 	}
+
 private:
 	string str_1;
 	string str_2;
+
+	void checkValidity() {
+		for (auto ch : str_1 + str_2) {
+			if (ch >= 'A' && ch <= 'Z') continue;
+			throw invalid_argument("Should be Alpha with Upper case!");
+		}
+	}
 };

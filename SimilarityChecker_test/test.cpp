@@ -7,7 +7,8 @@ public:
 
 	void checkValidity(string str1, string str2) {
 		try {
-			checker.checkAlpha(str1, str2);
+			checker.setStrings(str1, str2);
+			checker.checkAlpha();
 			FAIL();
 		}
 		catch (invalid_argument e) {
