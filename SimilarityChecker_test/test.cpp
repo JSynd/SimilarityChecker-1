@@ -1,9 +1,24 @@
 #include "pch.h"
 #include "../SimilarityChecker/checker.cpp"
 
-TEST(SimilarityCheck, AlphaScore_UpperCaseOnly) {
+class SimilarityCheckFixture : public testing::Test {
+public:
 	SimilarityChecker checker;
-	EXPECT_THROW(checker.checkAlpha(string("abc"), string("edf")), invalid_argument);
-	EXPECT_THROW(checker.checkAlpha(string("ABC"), string("EDf")), invalid_argument);
-	EXPECT_THROW(checker.checkAlpha(string("ABc"), string("EDF")), invalid_argument);
+
+	void checkValidity(string str1, string str2) {
+		try {
+			checker.checkAlpha(str1, str2);
+			FAIL();
+		}
+		catch (invalid_argument e) {
+			// PASS
+		}
+	}
+};
+
+TEST_F(SimilarityCheckFixture, AlphaScore_UpperCaseOnly) {
+	checkValidity("abc", "edf");
+	checkValidity("ABC", "EDf");
+	checkValidity("ABc", "EDF");
+	checkValidity("ABc", "EDF");
 }
