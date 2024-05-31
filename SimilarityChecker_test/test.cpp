@@ -11,12 +11,10 @@ public:
 	}
 };
 
-TEST_F(SimilarityCheckerFixture, LengthScore60) {
-	int score = getLengthSimilarityScore("ABC", "DEF");
-	EXPECT_EQ(score, 60);
+TEST_F(SimilarityCheckerFixture, LengthScore_60) {
+	EXPECT_EQ(getLengthSimilarityScore("ABC", "DEF"), 60);
 }
 
-TEST_F(SimilarityCheckerFixture, LengthScore0) {
-	int score = getLengthSimilarityScore("A", "BB");
-	EXPECT_EQ(score, 0);
+TEST_F(SimilarityCheckerFixture, LengthScore_0) {
+	EXPECT_EQ(getLengthSimilarityScore("A", "BB"), 0);
 }
