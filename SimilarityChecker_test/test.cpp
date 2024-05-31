@@ -16,9 +16,17 @@ public:
 	}
 };
 
-TEST_F(SimilarityCheckFixture, AlphaScore_UpperCaseOnly) {
+TEST_F(SimilarityCheckFixture, AlphaScore_InvalidInput_LowerCase) {
 	checkValidity("abc", "edf");
 	checkValidity("ABC", "EDf");
 	checkValidity("ABc", "EDF");
 	checkValidity("ABc", "EDF");
+};
+
+TEST_F(SimilarityCheckFixture, AlphaScore_InvalidInput_NonAlpha) {
+	checkValidity("123", "EDF");
+	checkValidity("ABC", "123");
+	checkValidity("AB!", "DEF");
+	checkValidity("ABC", "D(F");
+	checkValidity("AB,", "D'F");
 }

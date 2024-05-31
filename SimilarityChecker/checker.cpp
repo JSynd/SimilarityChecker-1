@@ -17,6 +17,7 @@ public:
 		for (auto ch : str2) {
 			if (ch >= 'a' && ch <= 'z') throw invalid_argument("found lower case!");
 		}
+		throw invalid_argument("error!");
 		return;
 	}
 private:
