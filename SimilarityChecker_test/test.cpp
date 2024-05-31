@@ -31,3 +31,17 @@ TEST_F(SimilarityCheckFixture, AlphaScore_InvalidInput_NonAlpha) {
 	checkValidity("ABC", "D(F");
 	checkValidity("AB,", "D'F");
 }
+
+TEST_F(SimilarityCheckFixture, AlphaScore_ScoreMax) {
+	checker.setStrings(string("ABC"), string("ABC"));
+	EXPECT_EQ(checker.checkAlpha(), 40);
+
+	checker.setStrings(string("ABC"), string("ABCBA"));
+	EXPECT_EQ(checker.checkAlpha(), 40);
+
+	checker.setStrings(string("ABCAB"), string("ABC"));
+	EXPECT_EQ(checker.checkAlpha(), 40);
+
+	checker.setStrings(string("A"), string("AAA"));
+	EXPECT_EQ(checker.checkAlpha(), 40);
+}

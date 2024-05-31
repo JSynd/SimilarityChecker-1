@@ -11,13 +11,15 @@ public:
 		checkValidity();
 	}
 
-	void checkAlpha() {
-		return;
+	int checkAlpha() {
+		return MAX_SCORE_ALPHA;
 	}
 
 private:
 	string str_1;
 	string str_2;
+
+	const int MAX_SCORE_ALPHA = 40;
 
 	void checkValidity() {
 		for (auto ch : str_1 + str_2) {
