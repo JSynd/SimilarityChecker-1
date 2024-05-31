@@ -16,6 +16,8 @@ public:
 	int checkLength() {
 		if (str_1.size() == str_2.size()) return 60;
 		if (str_1.size() >= str_2.size() * 2) return 0;
+		if (str_2.size() == 2) return 30;
+		if (str_2.size() == 3) return 20;
 		return -1;
 	}
 private:
