@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "../SimilarityChecker/checker.cpp"
+#include "../SimilarityChecker/length_checker.cpp"
 
 class SimilarityCheckerFixture : public testing::Test {
 public:
-	SimilarityChecker checker;
+	LengthChecker checker;
 
 	int getLengthSimilarityScore(string str1, string str2) {
 		checker.setTargetStrings(str1, str2);
