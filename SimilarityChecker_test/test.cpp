@@ -1,32 +1,32 @@
 #include "pch.h"
-#include "../SimilarityChecker/checker.cpp"
+#include "../SimilarityChecker/length_checker.cpp"
 
 class SimilarityCheckerFixture : public testing::Test {
 public:
-	SimilarityChecker checker;
+	LengthChecker checker;
 
-	int getLengthSimilarityScore(string str1, string str2) {
+	void checkScore(string str1, string str2, int expectScore) {
 		checker.setTargetStrings(str1, str2);
-		return checker.checkLength();
+		EXPECT_EQ(checker.checkLength(), expectScore);
 	}
 };
 
 TEST_F(SimilarityCheckerFixture, LengthScore_60) {
-	EXPECT_EQ(getLengthSimilarityScore("ABC", "DEF"), 60);
+	checkScore("ABC", "DEF", 60);
 }
 
 TEST_F(SimilarityCheckerFixture, LengthScore_0) {
-	EXPECT_EQ(getLengthSimilarityScore("A", "BB"), 0);
-	EXPECT_EQ(getLengthSimilarityScore("BB", "A"), 0);
+	checkScore("A", "BB", 0);
+	checkScore("BB", "A", 0);
 }
 
 TEST_F(SimilarityCheckerFixture, LengthScore_Partial) {
-	EXPECT_EQ(getLengthSimilarityScore("AAABB", "BBB"), 20);
-	EXPECT_EQ(getLengthSimilarityScore("AAB", "AABBB"), 20);
-	EXPECT_EQ(getLengthSimilarityScore("AA", "ABB"), 30);
-	EXPECT_EQ(getLengthSimilarityScore("ABA", "AB"), 30);
+	checkScore("AAABB", "BBB", 20);
+	checkScore("AAB", "AABBB", 20);
+	checkScore("AA", "ABB", 30);
+	checkScore("ABA", "AB", 30);
 }
 
 TEST_F(SimilarityCheckerFixture, LengthScore_Exception) {
-	EXPECT_EQ(getLengthSimilarityScore("AAABB", ""), 0);
+	checkScore("AAABB", "", 0);
 }
