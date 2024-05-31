@@ -15,3 +15,8 @@ TEST_F(SimilarityCheckerFixture, LengthScore60) {
 	int score = getLengthSimilarityScore("ABC", "DEF");
 	EXPECT_EQ(score, 60);
 }
+
+TEST_F(SimilarityCheckerFixture, LengthScore0) {
+	int score = getLengthSimilarityScore("A", "BB");
+	EXPECT_EQ(score, 0);
+}
