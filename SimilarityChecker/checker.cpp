@@ -12,13 +12,36 @@ public:
 	}
 
 	int checkAlpha() {
-		for (auto ch : str_1) {
-			if (str_2.find(ch) == string::npos) return 0;
-		}
-		for (auto ch : str_1) {
-			if (str_2.find(ch) == string::npos) return 0;
-		}
+		int same_cnt = getSameCnt(str_1, str_2);
+		int diff_cnt_1 = getDiffCnt(str_1, str_2);
+		if (same_cnt == 0) return 0;
 		return MAX_SCORE_ALPHA;
+	}
+
+	int getSameCnt(string targetStr, string refStr) {
+		int sameCnt = 0;
+		for (auto ch : targetStr) {
+			if (refStr.find(ch) != string::npos) sameCnt++;
+		}
+		return sameCnt;
+	}
+
+	int getDiffCnt(string targetStr, string refStr) {
+		int diffCnt = 0;
+		for (auto ch : targetStr) {
+			if (refStr.find(ch) == string::npos) diffCnt++;
+		}
+		return diffCnt;
+	}
+
+	int getSameCnt(int& same_cnt, int& diff_cnt) {
+		same_cnt = 0;
+		diff_cnt = 0;
+		for (auto ch : str_1) {
+			if (str_2.find(ch) == string::npos) diff_cnt++;
+			else same_cnt++;
+		}
+		if (same_cnt == 0) return 0;
 	}
 
 private:
