@@ -44,3 +44,7 @@ TEST_F(SimilarityCheckFixture, AlphaScore_ScoreMax) {
 	checkAlphabet("ABCAB", "ABC", 40);
 	checkAlphabet("A", "AAA", 40);
 }
+
+TEST_F(SimilarityCheckFixture, AlphaScore_Score0) {
+	checkAlphabet("ABC", "DEF", 0);
+}
