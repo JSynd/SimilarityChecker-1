@@ -39,10 +39,10 @@ TEST_F(SimilarityCheckFixture, AlphaScore_InvalidInput_NonAlpha) {
 }
 
 TEST_F(SimilarityCheckFixture, AlphaScore_ScoreMax) {
-	checkAlphabet("ABC", "ABC", 40);
-	checkAlphabet("ABC", "ABCBA", 40);
-	checkAlphabet("ABCAB", "ABC", 40);
-	checkAlphabet("A", "AAA", 40);
+	checkAlphabet("ABC", "ABC", checker.MAX_SCORE_ALPHA);
+	checkAlphabet("ABC", "ABCBA", checker.MAX_SCORE_ALPHA);
+	checkAlphabet("ABCAB", "ABC", checker.MAX_SCORE_ALPHA);
+	checkAlphabet("A", "AAA", checker.MAX_SCORE_ALPHA);
 }
 
 TEST_F(SimilarityCheckFixture, AlphaScore_Score0) {
@@ -50,7 +50,11 @@ TEST_F(SimilarityCheckFixture, AlphaScore_Score0) {
 }
 
 TEST_F(SimilarityCheckFixture, AlphaScore_ScorePartial) {
-	checkAlphabet("ABCD", "DB", 20);
-	checkAlphabet("ABD", "DC", 10);
-	checkAlphabet("ABDC", "ADC", 30);
+	checkAlphabet("ABCD", "DB", checker.MAX_SCORE_ALPHA / 4 * 2);
+	checkAlphabet("ABD", "DC", checker.MAX_SCORE_ALPHA / 4 * 1);
+	checkAlphabet("ABDC", "ADC", checker.MAX_SCORE_ALPHA / 4 * 3);
+	checkAlphabet("ABDCE", "A", checker.MAX_SCORE_ALPHA / 5 * 1);
+	checkAlphabet("ABDCE", "AB", checker.MAX_SCORE_ALPHA / 5 * 2);
+	checkAlphabet("ABDCE", "ACB", checker.MAX_SCORE_ALPHA / 5 * 3);
+	checkAlphabet("ABDCE", "ADCB", checker.MAX_SCORE_ALPHA / 5 * 4);
 }

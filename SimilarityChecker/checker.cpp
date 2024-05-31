@@ -5,6 +5,8 @@ using namespace std;
 
 class SimilarityChecker {
 public:
+	const int MAX_SCORE_ALPHA = 40;
+
 	void setStrings(string& str1, string& str2) {
 		str_1 = str1;
 		str_2 = str2;
@@ -13,17 +15,13 @@ public:
 
 	int checkAlpha() {
 		int same_cnt = getSameCnt(str_1, str_2);
-		int diff_cnt_1 = getDiffCnt(str_1, str_2);
-		if (same_cnt == 0) return 0;
-		if (diff_cnt_1 == 0) return MAX_SCORE_ALPHA;
-		return same_cnt * MAX_SCORE_ALPHA / 4;
+		int diff_cnt = getDiffCnt(str_1, str_2) + getDiffCnt(str_2, str_1);
+		return same_cnt * MAX_SCORE_ALPHA / (same_cnt + diff_cnt);
 	}
 
 private:
 	string str_1;
 	string str_2;
-
-	const int MAX_SCORE_ALPHA = 40;
 
 	void checkValidity() {
 		for (auto ch : str_1 + str_2) {
